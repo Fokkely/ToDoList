@@ -37,6 +37,16 @@ func moveItem(fromIndex: Int, toIndex: Int) {
 
 }
 
+func findDublicate(newItem: String) -> Bool {
+    
+    for item in 0..<toDoItems.count {
+        if toDoItems[item]["Name"] as? String == newItem {
+            return true
+        }
+    }
+    return false
+}
+
 func changeState(at item: Int) -> Bool {
     toDoItems[item]["isCompleted"] = !(toDoItems[item]["isCompleted"] as! Bool)    
     return toDoItems[item]["isCompleted"] as! Bool

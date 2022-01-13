@@ -21,19 +21,27 @@ class TableViewController: UITableViewController {
             textField.placeholder = "Позвонить маме..."
         }
         
+        let alertControllerDuplicate = UIAlertController(title: nil, message: "Такая задача уже существует", preferredStyle: .alert)
+        let alertActionUnderstand = UIAlertAction(title: "Понял", style: .default) { (alertUnderstand) in
+        }
+        alertControllerDuplicate.addAction(alertActionUnderstand)
+        
         let alertAction1 = UIAlertAction(title: "Отмена", style: .default) { (alert) in
         
         }
         
         let alertAction2 = UIAlertAction(title: "Создать", style: .default) { (alert) in
             let newItem = alertController.textFields?[0].text
-            if newItem == ""{
-                
-            } else {
-                addItem(nameItem: newItem ?? "")
-                self.tableView.reloadData()
+            if newItem != "" {
+                if findDublicate(newItem: newItem ?? "") == false {
+                    addItem(nameItem: newItem ?? "")
+                    self.tableView.reloadData()
+                } else {
+                    self.present(alertControllerDuplicate, animated: true, completion: nil)
+                }
             }
         }
+        
         
         alertController.addAction(alertAction1)
         alertController.addAction(alertAction2)
